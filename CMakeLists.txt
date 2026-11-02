@@ -57,3 +57,9 @@ if(GEMMALIVE_BUILD_PROGRAMS)
     target_link_libraries(gemmalive-cli PRIVATE gemmalive)
     target_compile_options(gemmalive-cli PRIVATE ${GEMMALIVE_WARNINGS})
 endif()
+
+if(GEMMALIVE_BUILD_TOOLS)
+    # Feature extraction for the end-of-turn and addressee heads (see training/).
+    add_executable(gemmalive-turn-features tools/turn_features.cpp)
+    target_link_libraries(gemmalive-turn-features PRIVATE gemmalive)
+endif()

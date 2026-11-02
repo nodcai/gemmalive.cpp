@@ -1,0 +1,9 @@
+# The heads' training scripts (training/): data, features' labels, training, export.
+gguf
+huggingface_hub
+numpy
+piper-tts
+pyarrow
+soundfile
+soxr
+torch
