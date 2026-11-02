@@ -62,4 +62,13 @@ if(GEMMALIVE_BUILD_TOOLS)
     # Feature extraction for the end-of-turn and addressee heads (see training/).
     add_executable(gemmalive-turn-features tools/turn_features.cpp)
     target_link_libraries(gemmalive-turn-features PRIVATE gemmalive)
+
+    # Batch answers to spoken prompts for benchmarks (see bench/).
+    add_executable(gemmalive-respond tools/respond.cpp)
+    target_link_libraries(gemmalive-respond PRIVATE gemmalive)
+
+    # Real-time replay of recorded audio through a session, for full-duplex
+    # benchmarks (see bench/).
+    add_executable(gemmalive-duplex tools/duplex.cpp)
+    target_link_libraries(gemmalive-duplex PRIVATE gemmalive)
 endif()

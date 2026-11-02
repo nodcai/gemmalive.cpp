@@ -1,0 +1,12 @@
+huggingface_hub
+numpy
+pyarrow
+soundfile
+soxr
+# VoiceBench's evaluators and GPT judge
+openai
+absl-py
+immutabledict
+langdetect
+loguru
+nltk
