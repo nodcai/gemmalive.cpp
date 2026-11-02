@@ -28,6 +28,7 @@ add_library(gemmalive STATIC
     src/gemma4.cpp
     src/mel.cpp
     src/model_file.cpp
+    src/sampler.cpp
     src/tokenizer.cpp
 )
 target_include_directories(gemmalive PUBLIC src)
