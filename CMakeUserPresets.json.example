@@ -1,0 +1,19 @@
+{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "dev",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/build-dev",
+      "cacheVariables": {
+        "FETCHCONTENT_SOURCE_DIR_LIVEVOICE": "${sourceParentDir}/livevoice.cpp"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev",
+      "configurePreset": "dev"
+    }
+  ]
+}

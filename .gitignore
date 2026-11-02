@@ -1,0 +1,14 @@
+build/
+build-*/
+.cache/
+compile_commands.json
+CMakeUserPresets.json
+*.gguf
+.DS_Store
+models/
+data/
+.venv/
+bench/results*
+.env
+bench/fdb/
+__pycache__/
