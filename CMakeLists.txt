@@ -26,6 +26,7 @@ add_library(gemmalive STATIC
     src/audio_encoder.cpp
     src/audio_io.cpp
     src/backend.cpp
+    src/device.cpp
     src/gemma4.cpp
     src/llm.cpp
     src/mel.cpp
