@@ -33,6 +33,7 @@ add_library(gemmalive STATIC
     src/mel.cpp
     src/model_file.cpp
     src/sampler.cpp
+    src/session.cpp
     src/tokenizer.cpp
     src/tts.cpp
     src/turn_head.cpp
