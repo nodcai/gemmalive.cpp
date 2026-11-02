@@ -25,6 +25,7 @@ endif()
 add_library(gemmalive STATIC
     src/backend.cpp
     src/model_file.cpp
+    src/tokenizer.cpp
 )
 target_include_directories(gemmalive PUBLIC src)
 target_include_directories(gemmalive PRIVATE ${miniaudio_SOURCE_DIR})
