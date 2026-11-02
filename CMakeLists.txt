@@ -24,6 +24,7 @@ endif()
 # The voice pipeline, for the program, the tools and apps that embed it.
 add_library(gemmalive STATIC
     src/audio_encoder.cpp
+    src/audio_io.cpp
     src/backend.cpp
     src/gemma4.cpp
     src/mel.cpp
