@@ -27,6 +27,7 @@ add_library(gemmalive STATIC
     src/audio_io.cpp
     src/backend.cpp
     src/gemma4.cpp
+    src/llm.cpp
     src/mel.cpp
     src/model_file.cpp
     src/sampler.cpp
