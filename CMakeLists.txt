@@ -29,10 +29,12 @@ add_library(gemmalive STATIC
     src/device.cpp
     src/gemma4.cpp
     src/llm.cpp
+    src/logging.cpp
     src/mel.cpp
     src/model_file.cpp
     src/sampler.cpp
     src/tokenizer.cpp
+    src/tts.cpp
 )
 target_include_directories(gemmalive PUBLIC src)
 target_include_directories(gemmalive PRIVATE ${miniaudio_SOURCE_DIR})
