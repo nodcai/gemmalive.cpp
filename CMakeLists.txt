@@ -35,6 +35,7 @@ add_library(gemmalive STATIC
     src/sampler.cpp
     src/tokenizer.cpp
     src/tts.cpp
+    src/vad.cpp
 )
 target_include_directories(gemmalive PUBLIC src)
 target_include_directories(gemmalive PRIVATE ${miniaudio_SOURCE_DIR})
