@@ -25,6 +25,7 @@ endif()
 add_library(gemmalive STATIC
     src/backend.cpp
     src/gemma4.cpp
+    src/mel.cpp
     src/model_file.cpp
     src/tokenizer.cpp
 )
