@@ -50,3 +50,10 @@ if(NOT MSVC)
     # miniaudio's decoder leaves helpers it does not need unused.
     set_source_files_properties(src/audio_io.cpp PROPERTIES COMPILE_OPTIONS -Wno-unused-function)
 endif()
+
+if(GEMMALIVE_BUILD_PROGRAMS)
+    add_executable(gemmalive-cli src/main.cpp)
+    set_target_properties(gemmalive-cli PROPERTIES OUTPUT_NAME gemmalive)
+    target_link_libraries(gemmalive-cli PRIVATE gemmalive)
+    target_compile_options(gemmalive-cli PRIVATE ${GEMMALIVE_WARNINGS})
+endif()
