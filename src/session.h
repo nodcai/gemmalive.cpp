@@ -34,8 +34,10 @@ struct ToolCall;
 // dropped and the turn goes on, or the reply plays on. The first words are
 // often a "by the way" that could go either way, so if the speech goes on,
 // the head decides once more on all of it; otherwise the turn is forgotten
-// and the reply's text goes on too. Turns while the assistant is silent
-// are always answered; on its own, a short "yes" is ambiguous.
+// and the reply's text goes on too. Speech while the assistant is silent
+// gets the same decision at its first commit, so that side talk right after
+// a reply is not answered either; only the user going on with a turn that
+// was just closed is taken for theirs without asking.
 //
 // With a VAD, only speech opens or resumes a turn; on its own, the energy
 // detector also takes chimes, clicks and music for speech. Speech well below

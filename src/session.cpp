@@ -304,7 +304,12 @@ void Session::process_frame(const std::vector<float> & frame) {
                 if (playing) {
                     interrupt();
                 }
-                start_user_turn();
+                // Speech while the assistant is silent is answered once the
+                // addressee head takes it for ours, at its first pause: side
+                // talk right after a reply is no turn either.
+                if (start_user_turn() && !playing && addressee_head_) {
+                    addressed_ = false;
+                }
             }
         }
         return;
@@ -465,8 +470,8 @@ void Session::commit_pause() {
 
 // Commits the audio and asks the addressee head about the turn so far. If it
 // is for us, a held reply is dropped and the turn goes on; if not, the reply
-// is played on, and the turn is forgotten unless this was the first check of
-// speech over the reply (doubted_), which gets another once there is more.
+// (if any) is played on, and the turn is forgotten unless this was the first
+// check of the speech (doubted_), which gets another once there is more.
 bool Session::check_addressee() {
     auto t = Clock::now();
     if (!llm_.commit_audio(&layer_states_, &head_layers_)) {
