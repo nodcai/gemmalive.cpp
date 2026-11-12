@@ -22,7 +22,7 @@ endif()
 # checkouts via FETCHCONTENT_SOURCE_DIR_<NAME> (see CMakeUserPresets.json.example).
 
 set(GEMMALIVE_GGML_COMMIT      facdc44a67da17df4433adcc468b424f48e9ded2) # v0.28.0
-set(GEMMALIVE_LIVEVOICE_COMMIT 7f66740d6adf25cd7c30fbbd2fdeee9a31f81e39)
+set(GEMMALIVE_LIVEVOICE_COMMIT 8746bc8976c478d8162d27832e03279473c3985f)
 
 FetchContent_Declare(ggml
     URL https://github.com/ggml-org/ggml/archive/${GEMMALIVE_GGML_COMMIT}.tar.gz
