@@ -90,8 +90,44 @@ std::string internal::json_string(std::string_view s) {
     return out + "\"";
 }
 
+// Whether `s` is a number as JSON writes one: -12, 3.25, 1e9.
+static bool json_number(std::string_view s) {
+    size_t i = 0;
+    const auto digits = [&] {
+        const size_t from = i;
+        while (i < s.size() && s[i] >= '0' && s[i] <= '9') {
+            i++;
+        }
+        return i - from;
+    };
+    if (i < s.size() && s[i] == '-') {
+        i++;
+    }
+    const size_t first = i;
+    const size_t whole = digits();
+    if (whole == 0 || (whole > 1 && s[first] == '0')) {
+        return false;
+    }
+    if (i < s.size() && s[i] == '.') {
+        i++;
+        if (digits() == 0) {
+            return false;
+        }
+    }
+    if (i < s.size() && (s[i] == 'e' || s[i] == 'E')) {
+        i++;
+        if (i < s.size() && (s[i] == '+' || s[i] == '-')) {
+            i++;
+        }
+        if (digits() == 0) {
+            return false;
+        }
+    }
+    return i == s.size();
+}
+
 // One value of Gemma's call syntax, as JSON: <|"|>text<|"|>, {key:value,...},
-// [value,...], or a bare number, true, false or null.
+// [value,...], or a bare number, true, false, null or word.
 static bool call_value(std::string_view & s, std::string & json) {
     const std::string_view quote = QUOTE;
     if (s.substr(0, quote.size()) == quote) {
@@ -140,8 +176,8 @@ static bool call_value(std::string_view & s, std::string & json) {
     if (word.empty()) {
         return false;
     }
-    const bool number = word.find_first_not_of("+-.0123456789eE") == std::string_view::npos;
-    json += number || word == "true" || word == "false" || word == "null" ? std::string(word) : json_string(word);
+    // Anything else is text, also what only looks like a number: a date, a range.
+    json += json_number(word) || word == "true" || word == "false" || word == "null" ? std::string(word) : json_string(word);
     s.remove_prefix(word.size());
     return true;
 }
