@@ -21,3 +21,4 @@ gemmalive_add_test(test_turn_head)
 # With GEMMALIVE_MODEL, and for the conversations GEMMALIVE_MMPROJ.
 gemmalive_add_test(test_tokenizer)
 gemmalive_add_test(test_rollback)
+gemmalive_add_test(test_hold)
