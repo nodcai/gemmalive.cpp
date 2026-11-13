@@ -12,6 +12,7 @@ endif()
 
 option(GEMMALIVE_BUILD_PROGRAMS "Build the gemmalive program" ${PROJECT_IS_TOP_LEVEL})
 option(GEMMALIVE_BUILD_TOOLS    "Build the benchmark and training tools" ${PROJECT_IS_TOP_LEVEL})
+option(GEMMALIVE_BUILD_TESTS    "Build the tests" ${PROJECT_IS_TOP_LEVEL})
 
 include(cmake/dependencies.cmake)
 
@@ -71,4 +72,9 @@ if(GEMMALIVE_BUILD_TOOLS)
     # benchmarks (see bench/).
     add_executable(gemmalive-duplex tools/duplex.cpp)
     target_link_libraries(gemmalive-duplex PRIVATE gemmalive)
+endif()
+
+if(GEMMALIVE_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
