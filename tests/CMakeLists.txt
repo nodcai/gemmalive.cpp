@@ -17,3 +17,6 @@ gemmalive_add_test(test_device)
 gemmalive_add_test(test_sampler)
 gemmalive_add_test(test_mel)
 gemmalive_add_test(test_turn_head)
+
+# With GEMMALIVE_MODEL, and for the conversations GEMMALIVE_MMPROJ.
+gemmalive_add_test(test_tokenizer)
