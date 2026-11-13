@@ -12,3 +12,4 @@ endfunction()
 
 # Without a model.
 gemmalive_add_test(test_calls)
+gemmalive_add_test(test_spoken)
