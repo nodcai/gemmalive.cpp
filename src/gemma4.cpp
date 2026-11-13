@@ -204,6 +204,9 @@ ggml_tensor * Gemma4::norm(ggml_context * ctx, ggml_tensor * x, ggml_tensor * w)
 
 void Gemma4::guard(int slot, int pos) {
     Guard & g = guards_[slot];
+    if (pos > 0 && g.pos == pos) {
+        return;  // guarded already, and perhaps saved
+    }
     g.pos   = pos > 0 ? pos : -1;
     g.saved = false;
 }

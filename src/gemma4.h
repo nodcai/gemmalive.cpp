@@ -40,9 +40,9 @@ public:
     // Logits for the last position decoded.
     const std::vector<float> & logits() const { return logits_; }
 
-    // Keeps what a rollback to `pos` needs, until the slot's next guard or a
-    // decode before `pos`; 0 clears it. Two slots, e.g. the end of the system
-    // prompt and the start of the current turn.
+    // Keeps what a rollback to `pos` needs, until the slot's next guard at
+    // another position or a decode before `pos`; 0 clears it. Two slots, e.g.
+    // the end of the system prompt and the start of the current turn.
     static constexpr int GUARDS = 2;
     void guard(int slot, int pos);
 

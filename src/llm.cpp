@@ -465,7 +465,8 @@ bool Llm::abandon_user_turn() {
         return false;
     }
     close_stream();
-    guard_chat(0);
+    // The turn's guard stays: the turn is only taken back by what is decoded
+    // next, where it started.
     n_past_     = turn_pos_;
     in_turn_    = false;
     turn_pcm_.clear();
