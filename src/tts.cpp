@@ -1,15 +1,18 @@
 #include "tts.h"
 
+#include "internal.h"
 #include "livevoice.h"
 
 #include <cstdio>
 #include <string>
 
+using namespace internal;
+
 // Symbols the model writes but the TTS can't say ("15°C" comes out as
 // "15 du c"), in words. A degree sign, or one with its unit, at the end of
 // `text` is left in `held` until the next text shows what it is, unless
 // `last`. `prev` is the last character said before `text`, and is updated.
-static std::string spoken(std::string text, std::string & held, char & prev, bool last) {
+std::string internal::spoken(std::string text, std::string & held, char & prev, bool last) {
     static const std::string deg = "\xC2\xB0";  // °
     const auto letter = [](char c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); };
     held.clear();

@@ -2,6 +2,7 @@
 
 #include "ggml.h"
 #include "gguf.h"
+#include "internal.h"
 #include "model_file.h"
 
 #include <array>
@@ -10,10 +11,12 @@
 #include <cstdio>
 #include <filesystem>
 
+using namespace internal;
+
 static constexpr const char * ARCH = "gemmalive-heads";
 
 // SHA-256 (FIPS 180-4), for GGUF header fingerprints.
-static std::string sha256_hex(const unsigned char * data, size_t size) {
+std::string internal::sha256_hex(const unsigned char * data, size_t size) {
     static const uint32_t k[64] = {
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
         0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,

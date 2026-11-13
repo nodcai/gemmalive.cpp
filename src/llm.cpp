@@ -1,12 +1,15 @@
 #include "llm.h"
 
 #include "audio_io.h"
+#include "internal.h"
 
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <thread>
 #include <vector>
+
+using namespace internal;
 
 // Gemma 4 turn markup, see the model's chat template.
 static constexpr const char * TURN_SYSTEM = "<|turn>system\n";
@@ -35,7 +38,7 @@ static constexpr int MAX_TURN_SECONDS = 30;
 
 // A tool as the chat template declares it:
 // declaration:name{description:<|"|>...<|"|>,parameters:{properties:{...},required:[...],type:<|"|>OBJECT<|"|>}}
-static std::string declare(const Tool & tool) {
+std::string internal::declare(const Tool & tool) {
     const auto quote = [](const std::string & s) { return QUOTE + s + QUOTE; };
     std::vector<const Tool::Param *> params;
     for (const auto & p : tool.params) {
@@ -65,7 +68,7 @@ static std::string declare(const Tool & tool) {
     return out + "}";
 }
 
-static std::string json_string(std::string_view s) {
+std::string internal::json_string(std::string_view s) {
     std::string out = "\"";
     for (const char c : s) {
         switch (c) {
@@ -144,7 +147,7 @@ static bool call_value(std::string_view & s, std::string & json) {
 }
 
 // call:name{key:value,...} -> the name and the arguments as a JSON object.
-static bool parse_call(std::string_view s, ToolCall & call) {
+bool internal::parse_call(std::string_view s, ToolCall & call) {
     const std::string_view prefix = "call:";
     const size_t brace = s.find('{');
     if (s.substr(0, prefix.size()) != prefix || brace == std::string_view::npos || brace == prefix.size()) {
@@ -157,7 +160,7 @@ static bool parse_call(std::string_view s, ToolCall & call) {
 }
 
 // At most `max` bytes of `s`, not cutting a UTF-8 character.
-static std::string_view cut(std::string_view s, size_t max) {
+std::string_view internal::cut(std::string_view s, size_t max) {
     if (s.size() <= max) {
         return s;
     }
