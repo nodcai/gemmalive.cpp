@@ -198,6 +198,26 @@ python training/turn/combine.py models/gemma-4-E2B-live-XS.gguf \
 the heads on prompts they have not seen, and `history.py --split val` turns
 by voices and texts left out.
 
+## Tests
+
+```sh
+ctest --test-dir build --output-on-failure
+```
+
+The tests of the pipeline's own logic (`tests/`) need no model: the tool
+markup, the text that goes to speech, the device context, sampling, the audio features and the heads' files. Those of
+the tokenizer and of a conversation (taking back an abandoned turn, holding
+a reply) are skipped unless they are given a model:
+
+```sh
+GEMMALIVE_MODEL=$PWD/models/gemma-4-E2B-live-XS.gguf ctest --test-dir build --output-on-failure
+```
+
+A model without its audio encoder takes the mmproj in `GEMMALIVE_MMPROJ`.
+
+`-DGEMMALIVE_BUILD_TESTS=OFF` leaves the tests out; as a subproject,
+gemmalive builds none.
+
 ## Benchmarks
 
 - `bench/fullduplex.py`: Full-Duplex-Bench v1.5 (interruptions, backchannels,
